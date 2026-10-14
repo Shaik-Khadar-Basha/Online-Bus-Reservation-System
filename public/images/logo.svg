@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 115" width="100%" height="100%">
+  <defs>
+    <!-- Shield Outer Gradient -->
+    <linearGradient id="shieldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+
+    <!-- Shield Inner Gradient -->
+    <linearGradient id="shieldBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="60%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0a192f" />
+    </linearGradient>
+
+    <!-- Bus Body Gradient -->
+    <linearGradient id="busBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="40%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+
+    <!-- Windshield Gradient -->
+    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e0f2fe" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="shieldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#2563eb" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- SHIELD EMBLEM (PURE SHAPE - NO SQUARE BACKGROUND) -->
+  <g filter="url(#shieldGlow)">
+    <!-- Shield Outer Border -->
+    <path d="M 50 3 
+             C 80 3, 94 12, 94 28 
+             C 94 65, 50 108, 50 111 
+             C 50 108, 6 65, 6 28 
+             C 6 12, 20 3, 50 3 Z" 
+          fill="url(#shieldBorder)" />
+
+    <!-- Shield Dark Inner Core -->
+    <path d="M 50 7 
+             C 77 7, 89 15, 89 29 
+             C 89 62, 50 102, 50 104 
+             C 50 102, 11 62, 11 29 
+             C 11 15, 23 7, 50 7 Z" 
+          fill="url(#shieldBg)" />
+
+    <!-- Top Crown Accent -->
+    <path d="M 32 14 L 50 9 L 68 14 L 60 18 L 50 15 L 40 18 Z" fill="#38bdf8" opacity="0.8" />
+
+    <!-- AERODYNAMIC LUXURY BUS PROFILE -->
+    <!-- Bus Roof & Body Outline -->
+    <path d="M 32 28 
+             C 32 23, 68 23, 68 28 
+             L 76 56 
+             C 77 62, 75 74, 71 78 
+             L 29 78 
+             C 25 74, 23 62, 24 56 
+             Z" 
+          fill="url(#busBody)" />
+
+    <!-- Panoramic Upper Windshield -->
+    <path d="M 34 30 
+             C 36 27, 64 27, 66 30 
+             L 69 45 
+             C 69 46, 31 46, 31 45 
+             Z" 
+          fill="url(#glassGrad)" />
+
+    <!-- Lower Grill & Front Cabin Divider -->
+    <path d="M 30 48 L 70 48 L 72 58 L 28 58 Z" fill="#0f172a" opacity="0.6" />
+
+    <!-- Sleek Aerodynamic Side Mirrors -->
+    <!-- Left Mirror -->
+    <path d="M 27 34 C 21 34, 18 38, 19 44 C 20 45, 22 45, 23 43 C 24 40, 26 38, 28 38 Z" fill="#38bdf8" />
+    <!-- Right Mirror -->
+    <path d="M 73 34 C 79 34, 82 38, 81 44 C 80 45, 78 45, 77 43 C 76 40, 74 38, 72 38 Z" fill="#38bdf8" />
+
+    <!-- LED Headlights (Bright Cyan & Yellow Accents) -->
+    <!-- Left Headlight -->
+    <path d="M 29 60 L 40 60 L 37 65 L 28 63 Z" fill="#fef08a" />
+    <circle cx="33" cy="62" r="2.5" fill="#ffffff" />
+    <!-- Right Headlight -->
+    <path d="M 71 60 L 60 60 L 63 65 L 72 63 Z" fill="#fef08a" />
+    <circle cx="67" cy="62" r="2.5" fill="#ffffff" />
+
+    <!-- Center Radiator Badge (KB Logo) -->
+    <rect x="44" y="59" width="12" height="6" rx="2" fill="#10b981" />
+    <text x="50" y="64" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="4.5" font-weight="900" fill="#ffffff" text-anchor="middle">KB</text>
+
+    <!-- Aerodynamic Speed Swoosh Stripes -->
+    <path d="M 20 68 C 35 63, 65 63, 80 68 C 65 65, 35 65, 20 68 Z" fill="#38bdf8" opacity="0.9" />
+    <path d="M 23 73 C 38 70, 62 70, 77 73 C 62 71, 38 71, 23 73 Z" fill="#10b981" />
+
+    <!-- Bottom Shield Arc Reflection -->
+    <path d="M 30 84 C 42 96, 50 99, 50 99 C 50 99, 58 96, 70 84 C 58 91, 50 94, 50 94 C 50 94, 42 91, 30 84 Z" fill="#38bdf8" opacity="0.6" />
+  </g>
+</svg>

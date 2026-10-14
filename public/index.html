@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KhadarBus - Luxury Intercity Bus Reservation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- TOP HEADER / NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="brand-logo" onclick="switchTab('buses')">
+                <img src="images/logo.png" alt="KhadarBus Logo" class="brand-logo-img">
+                <div class="brand-text-wrap">
+                    <span class="brand-name">KhadarBus</span>
+                    <span class="brand-sub">Your Journey Our Priority</span>
+                </div>
+            </div>
+
+            <!-- NAVIGATION BUTTONS -->
+            <nav class="nav-links">
+                <button class="nav-btn active" id="navBusesBtn" onclick="switchTab('buses')">
+                    <span class="nav-icon">🔍</span> Find Buses
+                </button>
+                <button class="nav-btn" id="navFleetBtn" onclick="switchTab('fleet')">
+                    <span class="nav-icon">🚍</span> All Buses
+                </button>
+                <button class="nav-btn" id="navBookingsBtn" onclick="switchTab('bookings')">
+                    <span class="nav-icon">🎫</span> Booked Tickets
+                </button>
+                <button class="nav-btn nav-btn-add" id="navAddBusBtn" onclick="openAddBusModal()">
+                    <span class="nav-icon">➕</span> Add Bus
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- REALISTIC HERO BANNER -->
+    <section class="hero-banner">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-pill">✨ Premium Intercity Travel</span>
+            <h1>Comfortable, Safe & On-Time Bus Journeys</h1>
+            <p>Book verified luxury sleeper, Volvo multi-axle, and express coaches with live seat selection.</p>
+            
+            <div class="hero-perks">
+                <div class="perk-item">
+                    <span class="perk-icon">🛡️</span>
+                    <span>100% Verified Fleet</span>
+                </div>
+                <div class="perk-item">
+                    <span class="perk-icon">💺</span>
+                    <span>Instant Seat Selection</span>
+                </div>
+                <div class="perk-item">
+                    <span class="perk-icon">⚡</span>
+                    <span>Live Confirmation</span>
+                </div>
+                <div class="perk-item">
+                    <span class="perk-icon">⭐</span>
+                    <span>4.9/5 Passenger Rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTAINER -->
+    <main class="main-container">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: FIND BUSES & BOOK -->
+        <!-- ========================================== -->
+        <section id="busesTab" class="tab-content active">
+            <!-- Search Box -->
+            <div class="search-card">
+                <div class="search-card-header">
+                    <h2>Book Your Bus Ticket</h2>
+                    <p>Enter origin and destination to view live available coaches</p>
+                </div>
+
+                <form id="searchForm" class="search-form-vertical" onsubmit="handleSearch(event)">
+                    <!-- ROW 1: SOURCE AND DESTINATION DROPDOWNS WITH SWAP BUTTON -->
+                    <div class="search-form-row source-dest-row">
+                        <div class="form-group">
+                            <label for="fromCity">Source (From)</label>
+                            <div class="input-wrap">
+                                <span class="field-icon">📍</span>
+                                <select id="fromCity" required>
+                                    <option value="">Select departure city</option>
+                                    <option value="Ahmedabad">Ahmedabad</option>
+                                    <option value="Bangalore">Bangalore</option>
+                                    <option value="Chennai">Chennai</option>
+                                    <option value="Coimbatore">Coimbatore</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Guntur">Guntur</option>
+                                    <option value="Hyderabad">Hyderabad</option>
+                                    <option value="Jaipur">Jaipur</option>
+                                    <option value="Kadapa">Kadapa</option>
+                                    <option value="Kochi">Kochi</option>
+                                    <option value="Kolkata">Kolkata</option>
+                                    <option value="Kozhikode">Kozhikode</option>
+                                    <option value="Kurnool">Kurnool</option>
+                                    <option value="Lucknow">Lucknow</option>
+                                    <option value="Madurai">Madurai</option>
+                                    <option value="Mangalore">Mangalore</option>
+                                    <option value="Mumbai">Mumbai</option>
+                                    <option value="Mysore">Mysore</option>
+                                    <option value="Nagpur">Nagpur</option>
+                                    <option value="Nandyala">Nandyala</option>
+                                    <option value="Nellore">Nellore</option>
+                                    <option value="Pondicherry">Pondicherry</option>
+                                    <option value="Pune">Pune</option>
+                                    <option value="Rajahmundry">Rajahmundry</option>
+                                    <option value="Surat">Surat</option>
+                                    <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                                    <option value="Tiruchirappalli">Tiruchirappalli</option>
+                                    <option value="Tirupati">Tirupati</option>
+                                    <option value="Varanasi">Varanasi</option>
+                                    <option value="Vijayawada">Vijayawada</option>
+                                    <option value="Visakhapatnam">Visakhapatnam</option>
+                                    <option value="Warangal">Warangal</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- SWAP BUTTON -->
+                        <div class="swap-btn-container">
+                            <button type="button" class="btn-swap-cities" id="swapCitiesBtn" onclick="swapCities()" title="Swap Source and Destination" aria-label="Swap Cities">
+                                <span class="swap-icon">⇄</span>
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="toCity">Destination (To)</label>
+                            <div class="input-wrap">
+                                <span class="field-icon">🏁</span>
+                                <select id="toCity" required>
+                                    <option value="">Select destination city</option>
+                                    <option value="Ahmedabad">Ahmedabad</option>
+                                    <option value="Bangalore">Bangalore</option>
+                                    <option value="Chennai">Chennai</option>
+                                    <option value="Coimbatore">Coimbatore</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Guntur">Guntur</option>
+                                    <option value="Hyderabad">Hyderabad</option>
+                                    <option value="Jaipur">Jaipur</option>
+                                    <option value="Kadapa">Kadapa</option>
+                                    <option value="Kochi">Kochi</option>
+                                    <option value="Kolkata">Kolkata</option>
+                                    <option value="Kozhikode">Kozhikode</option>
+                                    <option value="Kurnool">Kurnool</option>
+                                    <option value="Lucknow">Lucknow</option>
+                                    <option value="Madurai">Madurai</option>
+                                    <option value="Mangalore">Mangalore</option>
+                                    <option value="Mumbai">Mumbai</option>
+                                    <option value="Mysore">Mysore</option>
+                                    <option value="Nagpur">Nagpur</option>
+                                    <option value="Nandyala">Nandyala</option>
+                                    <option value="Nellore">Nellore</option>
+                                    <option value="Pondicherry">Pondicherry</option>
+                                    <option value="Pune">Pune</option>
+                                    <option value="Rajahmundry">Rajahmundry</option>
+                                    <option value="Surat">Surat</option>
+                                    <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                                    <option value="Tiruchirappalli">Tiruchirappalli</option>
+                                    <option value="Tirupati">Tirupati</option>
+                                    <option value="Varanasi">Varanasi</option>
+                                    <option value="Vijayawada">Vijayawada</option>
+                                    <option value="Visakhapatnam">Visakhapatnam</option>
+                                    <option value="Warangal">Warangal</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROW 2: TYPES OF BUSES AND JOURNEY DATE SIDE BY SIDE -->
+                    <div class="search-form-row">
+                        <div class="form-group">
+                            <label for="busTypeFilter">Type of Bus</label>
+                            <div class="input-wrap">
+                                <span class="field-icon">🚍</span>
+                                <select id="busTypeFilter">
+                                    <option value="All">All Bus Types</option>
+                                    <option value="AC Sleeper">AC Sleeper</option>
+                                    <option value="Luxury Express">Luxury Express</option>
+                                    <option value="AC Seater">AC Seater</option>
+                                    <option value="Non-AC Sleeper">Non-AC Sleeper</option>
+                                    <option value="Ultra delux">Ultra Deluxe</option>
+                                    <option value="Super Luxury">Super Luxury</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="travelDate">Journey Date</label>
+                            <div class="input-wrap">
+                                <span class="field-icon">📅</span>
+                                <input type="date" id="travelDate">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROW 3: ACTION BUTTONS -->
+                    <div class="search-form-actions">
+                        <button type="submit" class="btn btn-primary btn-search-large" id="searchSubmitBtn">
+                            <span>🔍</span> Search Buses
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="resetSearch()">
+                            Reset
+                        </button>
+                    </div>
+                </form>
+
+                <div class="popular-routes">
+                    <span class="popular-label">Popular Routes:</span>
+                    <button type="button" class="route-chip" onclick="fillAndSearch('Hyderabad', 'Bangalore')">Hyderabad ➔ Bangalore</button>
+                    <button type="button" class="route-chip" onclick="fillAndSearch('Hyderabad', 'Kurnool')">Hyderabad ➔ Kurnool</button>
+                    <button type="button" class="route-chip" onclick="fillAndSearch('Mumbai', 'Pune')">Mumbai ➔ Pune</button>
+                    <button type="button" class="route-chip" onclick="fillAndSearch('Chennai', 'Coimbatore')">Chennai ➔ Coimbatore</button>
+                    <button type="button" class="route-chip" onclick="fillAndSearch('Vijayawada', 'Hyderabad')">Vijayawada ➔ Hyderabad</button>
+                    <button type="button" class="route-chip" onclick="fillAndSearch('Bangalore', 'Goa')">Bangalore ➔ Goa</button>
+                    <button type="button" class="route-chip" onclick="fillAndSearch('Delhi', 'Jaipur')">Delhi ➔ Jaipur</button>
+                </div>
+            </div>
+
+            <!-- Results Header Bar (Hidden until search is performed) -->
+            <div class="section-title-bar" id="resultsTitleBar" style="display: none;">
+                <h2 id="resultsCount">Available Buses</h2>
+            </div>
+
+            <!-- Bus Cards List -->
+            <div id="busList" class="bus-list"></div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- TAB 2: ALL BUSES (MASTER TABLE) -->
+        <!-- ========================================== -->
+        <section id="fleetTab" class="tab-content">
+            <div class="card-box">
+                <div class="card-box-header">
+                    <div>
+                        <h2>🚍 All Registered KhadarBus Coaches</h2>
+                        <p>Complete fleet details with service numbers, bus types, seat capacity, and schedules.</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="openAddBusModal()">
+                            <span>➕</span> Add New Bus
+                        </button>
+                        <button class="btn btn-secondary btn-sm" onclick="loadFleetTable()">🔄 Refresh</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Coach</th>
+                                <th>Bus ID</th>
+                                <th>Service No</th>
+                                <th>Type of Bus</th>
+                                <th>Route</th>
+                                <th>Departure</th>
+                                <th>Total Seats</th>
+                                <th>Seats Left</th>
+                                <th>Fare</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fleetTableBody">
+                            <tr>
+                                <td colspan="10" class="loading-cell">Loading buses...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- TAB 3: BOOKED TICKETS RECORD -->
+        <!-- ========================================== -->
+        <section id="bookingsTab" class="tab-content">
+            <div class="card-box">
+                <div class="card-box-header">
+                    <div>
+                        <h2>🎫 Booked Tickets Record</h2>
+                        <p>Real-time passenger bookings ledger saved directly in the system database</p>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" onclick="loadBookings()">🔄 Refresh Bookings</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Passenger</th>
+                                <th>Phone</th>
+                                <th>Service No</th>
+                                <th>Bus Type</th>
+                                <th>Route</th>
+                                <th>Seat(s)</th>
+                                <th>Journey Date</th>
+                                <th>Total Fare</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                            <tr>
+                                <td colspan="11" class="loading-cell">Loading booked tickets...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- GREEN-THEMED SEAT SELECTION & BOOKING MODAL -->
+    <!-- ========================================== -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeModal('bookingModal')">&times;</button>
+            <div class="modal-header booking-green-header">
+                <div class="modal-title-row">
+                    <span class="modal-green-tag">🟢 Live Seat Selection</span>
+                    <h3 id="modalBusTitle">Reserve Seats</h3>
+                </div>
+                <p id="modalBusRoute" class="modal-subtitle">Route Details</p>
+            </div>
+
+            <div class="modal-body">
+                <!-- Bus Interactive Layout -->
+                <div class="bus-layout-container">
+                    <div class="bus-cockpit">🛞 Driver Cabin & Front Entrance</div>
+
+                    <div class="seat-legend">
+                        <div class="legend-item"><span class="seat-sample available"></span> Available (Green)</div>
+                        <div class="legend-item"><span class="seat-sample selected"></span> Selected</div>
+                        <div class="legend-item"><span class="seat-sample booked"></span> Booked</div>
+                    </div>
+
+                    <div class="seats-grid" id="seatsGrid"></div>
+                    <div class="rear-label">🚍 Rear of Coach</div>
+                </div>
+
+                <!-- Passenger Details -->
+                <div class="booking-form-pane">
+                    <h4>Passenger Information</h4>
+                    <form id="confirmBookingForm" onsubmit="handleConfirmBooking(event)">
+                        <div class="form-group">
+                            <label for="passengerName">Passenger Full Name *</label>
+                            <input type="text" id="passengerName" placeholder="Enter passenger name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="passengerPhone">Mobile Phone (10 digits) *</label>
+                            <input type="tel" id="passengerPhone" placeholder="Enter 10-digit mobile" required pattern="[0-9]{10}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="passengerEmail">Email Address</label>
+                            <input type="email" id="passengerEmail" placeholder="Enter email address">
+                        </div>
+
+                        <div class="price-breakdown green-breakdown">
+                            <div class="breakdown-row">
+                                <span>Selected Seat(s):</span>
+                                <strong id="selectedSeatsList" class="seats-badge">None selected</strong>
+                            </div>
+                            <div class="breakdown-row">
+                                <span>Fare per Seat:</span>
+                                <span id="modalFarePrice">₹0</span>
+                            </div>
+                            <hr>
+                            <div class="breakdown-row total-row">
+                                <span>Total Amount:</span>
+                                <strong id="modalTotalPrice" class="green-price">₹0</strong>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-green-book btn-block" id="bookNowBtn" disabled>
+                            ✓ Confirm & Reserve Seat(s)
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- REALISTIC BOARDING PASS RECEIPT MODAL -->
+    <!-- ========================================== -->
+    <div id="ticketModal" class="modal">
+        <div class="modal-card ticket-card">
+            <button class="modal-close" onclick="closeModal('ticketModal')">&times;</button>
+            <div class="ticket-header">
+                <div class="success-icon">✓</div>
+                <h3>Ticket Confirmed!</h3>
+                <p class="ticket-sub">Your journey has been reserved successfully.</p>
+            </div>
+
+            <div class="ticket-slip" id="ticketSlip">
+                <div class="ticket-top">
+                    <div class="ticket-brand-header">
+                        <img src="images/logo.png" alt="Logo" class="ticket-logo-thumb">
+                        <div>
+                            <span class="ticket-brand-name">KhadarBus Express</span>
+                            <span id="ticketServiceNo" class="service-pill">KB-101</span>
+                        </div>
+                    </div>
+                    <div class="ticket-id-tag">
+                        <span>BOOKING ID</span>
+                        <strong id="ticketBookingId">#1</strong>
+                    </div>
+                </div>
+
+                <div class="ticket-route-strip">
+                    <div>
+                        <span class="label">FROM</span>
+                        <strong id="ticketSource">Hyderabad</strong>
+                    </div>
+                    <div class="strip-arrow">➔ ➔ ➔</div>
+                    <div class="text-right">
+                        <span class="label">TO</span>
+                        <strong id="ticketDestination">Bangalore</strong>
+                    </div>
+                </div>
+
+                <div class="ticket-details-grid">
+                    <div>
+                        <span class="label">PASSENGER</span>
+                        <strong id="ticketPassenger">-</strong>
+                    </div>
+                    <div>
+                        <span class="label">PHONE</span>
+                        <strong id="ticketPhone">-</strong>
+                    </div>
+                    <div>
+                        <span class="label">BUS TYPE</span>
+                        <strong id="ticketBusType">-</strong>
+                    </div>
+                    <div>
+                        <span class="label">DEPARTURE</span>
+                        <strong id="ticketDeparture" class="green-text">-</strong>
+                    </div>
+                    <div>
+                        <span class="label">JOURNEY DATE</span>
+                        <strong id="ticketDate">-</strong>
+                    </div>
+                    <div>
+                        <span class="label">SEATS ALLOTTED</span>
+                        <strong id="ticketSeats" class="green-text">-</strong>
+                    </div>
+                    <div>
+                        <span class="label">TOTAL FARE PAID</span>
+                        <strong id="ticketFare" class="fare-highlight">-</strong>
+                    </div>
+                    <div>
+                        <span class="label">STATUS</span>
+                        <span class="status-confirmed">CONFIRMED</span>
+                    </div>
+                </div>
+
+                <div class="ticket-barcode-wrap">
+                    <div class="barcode">||||||| | |||| ||||| ||| ||||||| ||| |||| | |||||| |||||</div>
+                    <span class="barcode-text">KHADARBUS ELECTRONIC BOARDING PASS</span>
+                </div>
+            </div>
+
+            <div class="ticket-actions">
+                <button class="btn btn-secondary" onclick="window.print()">🖨️ Print Ticket</button>
+                <button class="btn btn-primary" onclick="closeModal('ticketModal'); switchTab('bookings');">View Booked Tickets</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ADD NEW BUS MODAL -->
+    <!-- ========================================== -->
+    <div id="addBusModal" class="modal">
+        <div class="modal-card modal-card-form">
+            <button class="modal-close" onclick="closeModal('addBusModal')">&times;</button>
+            <div class="modal-header">
+                <div class="modal-title-row">
+                    <span class="modal-badge-blue">🚍 Fleet Management</span>
+                    <h3>Add New Bus</h3>
+                </div>
+                <p class="modal-subtitle">Register a new coach to the KhadarBus fleet</p>
+            </div>
+
+            <form id="addBusForm" onsubmit="handleAddBus(event)" class="add-bus-form">
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="newServiceNo">Service Number *</label>
+                        <div class="input-wrap">
+                            <span class="field-icon">🏷️</span>
+                            <input type="text" id="newServiceNo" placeholder="e.g. KB-121 or EXP-201" required autocomplete="off" style="text-transform: uppercase;">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newBusType">Bus Type *</label>
+                        <div class="input-wrap">
+                            <span class="field-icon">🚍</span>
+                            <select id="newBusType" required>
+                                <option value="AC Sleeper">AC Sleeper</option>
+                                <option value="Luxury Express">Luxury Express</option>
+                                <option value="AC Seater">AC Seater</option>
+                                <option value="Non-AC Sleeper">Non-AC Sleeper</option>
+                                <option value="Super Luxury">Super Luxury</option>
+                                <option value="Ultra Deluxe">Ultra Deluxe</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="newSource">Source City (From) *</label>
+                        <div class="input-wrap">
+                            <span class="field-icon">📍</span>
+                            <input type="text" id="newSource" list="citiesDatalist" placeholder="e.g. Hyderabad" required autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newDestination">Destination City (To) *</label>
+                        <div class="input-wrap">
+                            <span class="field-icon">🏁</span>
+                            <input type="text" id="newDestination" list="citiesDatalist" placeholder="e.g. Bangalore" required autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datalist for autocomplete -->
+                <datalist id="citiesDatalist"></datalist>
+
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="newDepartureTime">Departure Time *</label>
+                        <div class="input-wrap">
+                            <span class="field-icon">⏰</span>
+                            <input type="time" id="newDepartureTime" required value="20:00">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newArrivalTime">Arrival Time *</label>
+                        <div class="input-wrap">
+                            <span class="field-icon">⏰</span>
+                            <input type="time" id="newArrivalTime" required value="06:00">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="newTotalSeats">Total Seats *</label>
+                        <div class="input-wrap">
+                            <span class="field-icon">💺</span>
+                            <input type="number" id="newTotalSeats" min="10" max="60" value="40" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newFare">Ticket Fare (₹) *</label>
+                        <div class="input-wrap">
+                            <span class="field-icon">₹</span>
+                            <input type="number" id="newFare" min="50" max="10000" step="10" placeholder="e.g. 750" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('addBusModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveBusBtn">
+                        <span>✓</span> Add Bus to Fleet
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- DELETE BUS CONFIRMATION MODAL -->
+    <!-- ========================================== -->
+    <div id="deleteBusModal" class="modal">
+        <div class="modal-card modal-card-sm">
+            <button class="modal-close" onclick="closeModal('deleteBusModal')">&times;</button>
+            <div class="delete-modal-content">
+                <div class="delete-modal-icon">🗑️</div>
+                <h3>Delete Bus Coach</h3>
+                <p id="deleteBusPrompt">Are you sure you want to remove this bus from the fleet?</p>
+                <div class="delete-bus-info-card" id="deleteBusInfoCard">
+                    <!-- Populated dynamically -->
+                </div>
+                <p class="delete-warning-note">⚠️ Note: Associated bookings for this coach will also be removed.</p>
+                <div class="modal-form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('deleteBusModal')">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBusBtn">Delete Coach</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand-wrap">
+                <img src="images/logo.png" alt="Logo" class="footer-logo">
+                <div>
+                    <strong>KhadarBus Express Lines</strong>
+                    <p>Safe, comfortable, and reliable intercity coach services across India.</p>
+                </div>
+            </div>
+            <p class="copyright">&copy; KhadarBus. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
